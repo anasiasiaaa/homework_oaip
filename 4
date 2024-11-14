@@ -1,0 +1,68 @@
+#include <iostream>
+#include <vector>
+#include <iomanip> //для форматирования вывода
+#include <clocale>
+using namespace std;
+
+double f(double a, double x) {
+    return a, x; 
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    double x1, x2, x3;
+    double a1, a2, a3;
+
+    //ввод значений x1, x2, x3
+    cout << "Введите x1, x2, x3: ";
+    cin >> x1 >> x2 >> x3;
+
+    //ввод значений a1, a2, a3
+    cout << "Введите a1, a2, a3: ";
+    cin >> a1 >> a2 >> a3;
+
+    //начальное значение a
+    double a = a1;
+
+    //цикл по a
+    while (a <= a2) {
+        double sum = 0; //сумма положительных значений
+        int kol = 0;    //количество четных значений
+
+        //проверка для x1, x2, x3
+        for (double x : {x1, x2, x3}) {
+            double y = f(a, x); //вычисляем y = f(a, x)
+
+            //проверяем, является ли y положительным
+            if (y > 0) {
+                sum += y; //если положительное, добавляем к sum
+
+                //проверяем, является ли y четным
+                if (static_cast<int>(y) % 2 == 0) {
+                    kol++; //если четное, увеличиваем kol
+                }
+            }
+        }
+
+        //проверка на количество четных y
+        if (kol == 0) {
+            cout << "Для a = " << a << ": нет четных y" << endl;
+        }
+        else {
+            cout << "Для a = " << a << ": ";
+            //проверка, есть ли положительные y
+            if (sum > 0) {
+                double ratio = sum / kol; //вычисляем ratio - точную рациональную дробь
+                cout << "отношение суммы положительных y к количеству четных = "
+                    << fixed << setprecision(2) << ratio << endl;
+            }
+            else {
+                cout << "нет y > 0" << endl;
+            }
+        }
+
+        a += a3; //увеличиваем a на a3
+    }
+
+    return 0;
+}
