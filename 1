@@ -1,0 +1,84 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <clocale>
+
+using namespace std;
+
+//определение количества дней в месяце
+int daysInMonth(int year, int month) {
+    switch (month) {
+    case 2:
+        return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) ? 29 : 28;
+    case 4: case 6: case 9: case 11:
+        return 30;
+    default:
+        return 31;
+    }
+}
+
+//получение списка праздников
+void getHolidays(int month) {
+    switch (month) {
+    case 1:
+        cout << "1: Новый год\n7: Рождество" << endl;
+        break;
+    case 2:
+        cout << "14: День святого Валентина\n23: День защитника Отечества" << endl;
+        break;
+    case 3:
+        cout << "8: Международный женский день" << endl;
+        break;
+    case 4:
+        cout << "1: День смеха" << endl;
+        break;
+    case 5:
+        cout << "1: День труда\n9: День Победы" << endl;
+        break;
+    case 6:
+        cout << "1: Международный день защиты детей" << endl;
+        break;
+    case 7:
+        cout << "3: День ГАИ (День ГИБДД МВД РФ)" << endl;
+        break;
+    case 8:
+        cout << "2: День Воздушно-десантных войск (День ВДВ)" << endl;
+        break;
+    case 9:
+        cout << "1: День знаний" << endl;
+        break;
+    case 10:
+        cout << "5: День учителя" << endl;
+        break;
+    case 11:
+        cout << "4: День народного единства" << endl;
+        break;
+    case 12:
+        cout << "31: Новый год" << endl;
+        break;
+    }
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    int year, month;
+    //ввод от пользователя года и месяца
+    cout << "Введите год: ";
+    cin >> year;
+
+    cout << "Введите номер месяца (1-12): ";
+    cin >> month;
+
+    //проверка корректности ввода месяца
+    if (month < 1 || month > 12) {
+        cout << "Некорректный номер месяца." << endl;
+        return 1;
+    }
+
+    int days = daysInMonth(year, month);
+    cout << "В этом месяце " << days << " дней." << endl;
+
+    getHolidays(month); 
+
+    return 0;
+}
